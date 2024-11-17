@@ -23,8 +23,8 @@ public class CuentaController {
     //Listar todos las cuentas
     @GetMapping
 
-    public List<Cuenta> buscar_Id_cuenta(@RequestParam Integer id_cuenta) {
-        return RepositoryCuenta.findAllById(id_cuenta);
+    public List<Cuenta> buscar_Id_cuenta(@RequestParam Integer Id) {
+        return RepositoryCuenta.findAllById(Id);
     }
 
     public List<Cuenta> listar () {
@@ -35,9 +35,5 @@ public class CuentaController {
     @PostMapping
     public Cuenta agregar(@RequestBody Cuenta cuenta ) {
         return RepositoryCuenta.save(cuenta);
-    }
-    
-
-
-
+    }  
 }

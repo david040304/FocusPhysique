@@ -1,6 +1,5 @@
 package com.springboot.focusphysique.backend.Entidades;
 
-import jakarta.annotation.Generated;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,12 +11,13 @@ import lombok.Setter;
 public class Cuenta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_cuenta;
+    @Column(name = "Id_cuenta")
+    private Integer Id;
 
-    @Column(nullable = false)
+    @Column(name = "usuario")
     private String usuario;
 
-    @Column(nullable = false)
+    @Column(name = "contraseña")
     private String contraseña;
 
 }
