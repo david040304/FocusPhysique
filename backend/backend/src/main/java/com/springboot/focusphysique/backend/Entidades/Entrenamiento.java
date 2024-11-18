@@ -31,7 +31,7 @@ public class Entrenamiento {
     private String nivelDificultad;
 
     @Column(name = "Genero")
-    private String genero;
+    private Character genero;
 
     @Column(name = "MET")
     private Double met;

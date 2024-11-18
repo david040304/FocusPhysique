@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.springboot.focusphysique.backend.Servicios.CuentaService;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -34,7 +36,7 @@ public class CuentaController {
     }
     
     //LLAMADA del procedimeinto eliminar 
-    @PostMapping("/eliminarCuenta")
+    @DeleteMapping("/eliminarCuenta")
     public ResponseEntity<String> eliminarCuenta(@RequestBody Map<String, Integer> datos) {
         try {
         // Validar que el ID de la cuenta no sea nulo
@@ -56,7 +58,7 @@ public class CuentaController {
     }
 
     //llamda al metodo actualizar cuenta
-    @PostMapping("/actualizarCuenta")
+    @PutMapping("/actualizarCuenta")
     public ResponseEntity<String> actualizarCuenta(@RequestBody Map<String, String> datos) {
         try {
             // Parseo de los datos enviados en la solicitud
