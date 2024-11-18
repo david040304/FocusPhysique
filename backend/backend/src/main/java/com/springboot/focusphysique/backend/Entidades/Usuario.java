@@ -15,7 +15,7 @@ import lombok.Setter;
 @Table(name = "usuario")
 @Getter
 @Setter
-// configuracion del procedimiento insert
+// Configuración del procedimiento insert
 @NamedStoredProcedureQuery(
     name = "Insert_Usuario",
     procedureName = "Insert_Usuario",
@@ -31,39 +31,65 @@ import lombok.Setter;
         @StoredProcedureParameter(name = "P_Peso_Inicio", type = Double.class),
         @StoredProcedureParameter(name = "P_Id_cuenta", type = Integer.class)
     }
-
 )
+// Configuración del procedimiento eliminar cuenta
+@NamedStoredProcedureQuery(
+    name = "Delete_Usuario",
+    procedureName = "Delete_Usuario",
+    parameters = {
+        @StoredProcedureParameter(name = "P_Id_usuario", type = Integer.class)
+    }
+)
+// Configuración del procedimiento actualizar cuenta
+@NamedStoredProcedureQuery(
+    name = "Update_Usuario",
+    procedureName = "Update_Usuario",
+    parameters = {
+        @StoredProcedureParameter(name = "P_Id_usuario", type = String.class),
+        @StoredProcedureParameter(name = "P_P_Nombre", type = String.class),
+        @StoredProcedureParameter(name = "P_S_Nombre", type = String.class),
+        @StoredProcedureParameter(name = "P_P_Apellido", type = String.class),
+        @StoredProcedureParameter(name = "P_S_Apellido", type = String.class),
+        @StoredProcedureParameter(name = "P_Edad", type = Integer.class),
+        @StoredProcedureParameter(name = "P_Telefono", type = String.class),
+        @StoredProcedureParameter(name = "P_Genero", type = Character.class),
+        @StoredProcedureParameter(name = "P_Altura_Inicio", type = Double.class),
+        @StoredProcedureParameter(name = "P_Peso_Inicio", type = Double.class),
+        @StoredProcedureParameter(name = "P_Id_cuenta", type = Integer.class)
+    }
+)
+
 public class Usuario {
     @Id
     @Column(name = "Id_usuario")
-    private Integer idUsuario;
+    private Integer Id_Usuario;
 
     @Column(name = "P_Nombre")
-    private String primerNombre;
+    private String P_Nombre;
 
     @Column(name = "S_Nombre")
-    private String segundoNombre;
+    private String S_Nombre;
 
     @Column(name = "P_Apellido")
-    private String primerApellido;
+    private String P_Apellido;
 
     @Column(name = "S_Apellido")
-    private String segundoApellido;
+    private String S_Apellido;
 
     @Column(name = "Edad")
-    private Integer edad;
+    private Integer Edad;
 
     @Column(name = "Telefono")
-    private String telefono;
+    private String Telefono;
 
     @Column(name = "Genero")
-    private Character genero;
+    private Character Genero;
 
     @Column(name = "Altura_Inicio")
-    private Double alturaInicio;
+    private Double Altura_Inicio;
 
     @Column(name = "Peso_Inicio")
-    private Double pesoInicio;
+    private Double Peso_Inicio;
 
     @ManyToOne
     @JoinColumn(name = "Id_cuenta", referencedColumnName = "Id_cuenta")

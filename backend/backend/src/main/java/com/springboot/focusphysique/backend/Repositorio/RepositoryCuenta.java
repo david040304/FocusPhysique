@@ -9,8 +9,6 @@ import org.springframework.data.repository.query.Param;
 import com.springboot.focusphysique.backend.Entidades.Cuenta;
 
 public interface RepositoryCuenta  extends JpaRepository<Cuenta,Integer>{
-
-  
     //Ejecutar procedimiento almacenado insertar
     @Procedure(name="Insert_Cuenta")
     void insertCuenta(@Param("p_usuario" ) String usuario, @Param("p_contraseña") String contraseña);
@@ -26,7 +24,5 @@ public interface RepositoryCuenta  extends JpaRepository<Cuenta,Integer>{
         @Param("p_usuario") String usuario, 
         @Param("p_contraseña") String pcontraseña
     );
-
-
 
 }
