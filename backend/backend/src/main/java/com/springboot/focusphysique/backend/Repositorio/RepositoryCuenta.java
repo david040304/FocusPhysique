@@ -10,12 +10,19 @@ import com.springboot.focusphysique.backend.Entidades.Cuenta;
 
 public interface RepositoryCuenta  extends JpaRepository<Cuenta,Integer>{
 
-    //buscar por ID
-    //List<Cuenta> findAllById(Integer Id);
-
-    //Ejecutar procedimiento almacenado
+  
+    //Ejecutar procedimiento almacenado insertar
     @Procedure(name="Insert_Cuenta")
     void insertCuenta(@Param("p_usuario" ) String usuario, @Param("p_contraseña") String contraseña);
+
+    //procedimiento eliminar cuenta
+    @Procedure(name="Delete_Cuenta")
+    void deleteCuenta(@Param("p_id_cuenta") Integer id);
+    
+    //procedimiento actualizar cuenta
+    @Procedure(name="Update_Cuenta")
+    void updateCuenta(@Param("p_id_cuenta") Integer id, @Param("p_usuario") String usuario, @Param("p_contraseña") String contraseña);
+
 
 
 }
