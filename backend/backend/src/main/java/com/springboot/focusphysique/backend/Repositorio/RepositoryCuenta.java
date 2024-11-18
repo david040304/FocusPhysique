@@ -21,7 +21,11 @@ public interface RepositoryCuenta  extends JpaRepository<Cuenta,Integer>{
     
     //procedimiento actualizar cuenta
     @Procedure(name="Update_Cuenta")
-    void updateCuenta(@Param("p_id_cuenta") Integer id, @Param("p_usuario") String usuario, @Param("p_contraseña") String contraseña);
+    void updateCuenta(
+        @Param("p_id_cuenta") Integer id, 
+        @Param("p_usuario") String usuario, 
+        @Param("p_contraseña") String pcontraseña
+    );
 
 
 

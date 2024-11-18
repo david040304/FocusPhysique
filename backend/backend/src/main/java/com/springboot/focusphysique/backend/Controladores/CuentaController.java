@@ -3,12 +3,15 @@ package com.springboot.focusphysique.backend.Controladores;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.springboot.focusphysique.backend.Servicios.CuentaService;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -26,6 +29,7 @@ public class CuentaController {
         String usuario = datos.get("usuario");
         String contraseña = datos.get("contraseña");
         try {
+
             cuentaService.insertarCuenta(usuario, contraseña);
             return ResponseEntity.ok("Cuenta insertada con éxito.");
         } catch (Exception e) {
@@ -34,7 +38,7 @@ public class CuentaController {
     }
     
     //LLAMADA del procedimeinto eliminar 
-    @PostMapping("/eliminarCuenta")
+    @DeleteMapping("/eliminarCuenta")
     public ResponseEntity<String> eliminarCuenta(@RequestBody Map<String, Integer> datos) {
         try {
         // Validar que el ID de la cuenta no sea nulo
@@ -56,23 +60,24 @@ public class CuentaController {
     }
 
     //llamda al metodo actualizar cuenta
-    @PostMapping("/actualizarCuenta")
+    @PutMapping("/actualizarCuenta")
     public ResponseEntity<String> actualizarCuenta(@RequestBody Map<String, String> datos) {
         try {
-            // Parseo de los datos enviados en la solicitud
-            Integer id_cuenta = Integer.parseInt(datos.get("id_cuenta")); // Convertir a Integer
+            // Obtener y validar datos
+            Integer id_cuenta = Integer.parseInt(datos.get("id_cuenta"));
             String usuario = datos.get("usuario");
             String contraseña = datos.get("contraseña");
-            // Llamada al servicio para actualizar la cuenta
+
+            // Llamar al servicio para actualizar la cuenta
             cuentaService.actualizarCuenta(id_cuenta, usuario, contraseña);
-            return ResponseEntity.ok("Cuenta actualizada con éxito.");
+
+            return new ResponseEntity<>("Cuenta actualizada con éxito.", HttpStatus.OK);
         } catch (NumberFormatException e) {
-            // Manejo de errores de conversión
-            return ResponseEntity.badRequest().body("El ID de cuenta debe ser un número válido.");
+            return new ResponseEntity<>("Error en el formato numérico: " + e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
-            // Manejo de otros errores
-            return ResponseEntity.status(500).body("Error al actualizar la cuenta: " + e.getMessage());
+            return new ResponseEntity<>("Error al actualizar la cuenta: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
+
     }
     
 
