@@ -11,22 +11,22 @@ public interface RepositoryTipoDeEntrenamiento extends JpaRepository<Tipo_de_Ent
     //ejecutar el procedimiento de insert
     @Procedure(name="Insert_Tipo_de_Entrenamiento")
     void insertTipoDeEntrenamiento(
-        @Param("P_Nombre_tipo") String P_Nombre_tipo,
-        @Param("P_Descripcion") String P_Descripcion
+        @Param("P_Nombre_tipo") String nombreTipo,
+        @Param("P_Descripcion") String descripcion
     );
 
     //ejecutar el procedimiento de update
     @Procedure(name="Update_Tipo_de_Entrenamiento")
     void updateTipoDeEntrenamiento(
-        @Param("P_Id_Tipo_Entren") Integer P_Id_Tipo_Entren,
-        @Param("P_Nombre_tipo") String P_Nombre_tipo,
-        @Param("P_Descripcion") String P_Descripcion
+        @Param("P_Id_Tipo_Entren") Integer idTipoEntren,
+        @Param("P_Nombre_tipo") String nombreTipo,
+        @Param("P_Descripcion") String descripcion
     );
 
     //ejecutar el procedimiento de delete
     @Procedure(name="Delete_Tipo_de_Entrenamiento")
     void deleteTipoDeEntrenamiento(
-        @Param("P_Id_Tipo_Entren") Integer P_Descripcion
+        @Param("P_Id_Tipo_Entren") Integer idTipoEntren
     );
 
 }

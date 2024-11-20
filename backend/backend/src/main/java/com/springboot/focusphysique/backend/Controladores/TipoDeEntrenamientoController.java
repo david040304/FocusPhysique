@@ -11,13 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
 @RequestMapping("/TipoDeEntrenamiento")
-
 
 public class TipoDeEntrenamientoController {
 
@@ -48,12 +46,12 @@ public class TipoDeEntrenamientoController {
     //update
     @PutMapping("/actualizar")
     public ResponseEntity<String> actualizarTipoDeEntrenamiento(@RequestBody Map<String, Object> datos) {
-        Integer id = (Integer) datos.get("P_Id_Tipo_Entren");
+        Integer idTipoEntren = (Integer) datos.get("P_Id_Tipo_Entren");
         String nombreTipo = (String) datos.get("P_Nombre_tipo");
         String descripcion = (String) datos.get("P_Descripcion");
 
         try {
-            tipoDeEntrenamientoService.actualizarTipoDeEntrenamiento(id, nombreTipo, descripcion);
+            tipoDeEntrenamientoService.actualizarTipoDeEntrenamiento(idTipoEntren, nombreTipo, descripcion);
             return ResponseEntity.ok("Tipo de entrenamiento actualizado con éxito.");
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error al actualizar: " + e.getMessage());
@@ -61,9 +59,9 @@ public class TipoDeEntrenamientoController {
     }
     //delete
     @DeleteMapping("/Eliminar")
-    public ResponseEntity<String> eliminarTipoDeEntrenamiento(@RequestParam Integer id) {
+    public ResponseEntity<String> eliminarTipoDeEntrenamiento(@RequestParam Integer idTipoEntren) {
         try {
-            tipoDeEntrenamientoService.eliminarTipoDeEntrenamiento(id);
+            tipoDeEntrenamientoService.eliminarTipoDeEntrenamiento(idTipoEntren);
             return ResponseEntity.ok("Tipo de entrenamiento eliminado con éxito.");
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error al eliminar: " + e.getMessage());

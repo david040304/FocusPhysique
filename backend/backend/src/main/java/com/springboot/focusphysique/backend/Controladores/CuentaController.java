@@ -71,9 +71,9 @@ public class CuentaController {
             // Llamar al servicio para actualizar la cuenta
             cuentaService.actualizarCuenta(id_cuenta, usuario, contraseña);
 
-            return new ResponseEntity<>("Cuenta actualizada con éxito.", HttpStatus.OK);
+            return new ResponseEntity<>("Cuenta actualizada con exito.", HttpStatus.OK);
         } catch (NumberFormatException e) {
-            return new ResponseEntity<>("Error en el formato numérico: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Error en el formato numerico: " + e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             return new ResponseEntity<>("Error al actualizar la cuenta: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }

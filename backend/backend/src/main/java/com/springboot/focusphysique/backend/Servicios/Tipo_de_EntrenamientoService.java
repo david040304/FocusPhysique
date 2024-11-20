@@ -11,17 +11,17 @@ public class Tipo_de_EntrenamientoService {
     private RepositoryTipoDeEntrenamiento repositoryTipoDeEntrenamiento;
     // metodo insert
 
-    public void insertarTipoDeEntrenamiento(String P_Nombre_tipo, String P_Descripcion) {
-        repositoryTipoDeEntrenamiento.insertTipoDeEntrenamiento(P_Nombre_tipo, P_Descripcion);
+    public void insertarTipoDeEntrenamiento(String nombreTipo, String descripcion) {
+        repositoryTipoDeEntrenamiento.insertTipoDeEntrenamiento(nombreTipo, descripcion);
     }
 
     // metodo update
-    public void actualizarTipoDeEntrenamiento(Integer P_Id_Tipo_Entren, String P_Nombre_tipo, String P_Descripcion) {
-        repositoryTipoDeEntrenamiento.updateTipoDeEntrenamiento(P_Id_Tipo_Entren, P_Nombre_tipo, P_Descripcion);
+    public void actualizarTipoDeEntrenamiento(Integer idTipoEntren, String nombreTipo, String descripcion) {
+        repositoryTipoDeEntrenamiento.updateTipoDeEntrenamiento(idTipoEntren, nombreTipo, descripcion);
     }
     // metodo delete
-    public void eliminarTipoDeEntrenamiento(Integer P_Id_Tipo_Entren) {
-        repositoryTipoDeEntrenamiento.deleteTipoDeEntrenamiento(P_Id_Tipo_Entren);
+    public void eliminarTipoDeEntrenamiento(Integer idTipoEntren) {
+        repositoryTipoDeEntrenamiento.deleteTipoDeEntrenamiento(idTipoEntren);
     }
 
 
