@@ -31,7 +31,7 @@ public class AdminController {
     @PostMapping
     public ResponseEntity<Administrador> crearAdministrador(@RequestBody Administrador entity){
         Administrador nuevAdmin = servicio.crearAdministrador(entity);
-        return new ResponseEntity<>(nuevAdmin, HttpStatus.CREATED);
+        return new ResponseEntity<>(nuevAdmin, (HttpStatus.CREATED));
     }
 
     //configurar metodo para obtnerAdmin
