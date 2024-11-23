@@ -45,6 +45,7 @@ public class AdminController {
         }
         return ResponseEntity.notFound().build();
     }
+    
 
     //configurar metodo actualizarAdmin
     @PutMapping("/{id}")
