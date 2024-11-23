@@ -1,7 +1,6 @@
 package com.springboot.focusphysique.backend.Servicio;
 
 import java.util.Optional;
-
 import com.springboot.focusphysique.backend.Entidades.Usuario;
 
 public interface IUsuarioServicio {
