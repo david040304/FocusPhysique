@@ -1,44 +1,43 @@
 package com.springboot.focusphysique.backend.Entidades;
 
-import java.util.List;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
 
 @Entity
 @Data
-public class Usuario {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_Usuario;
-    private String P_Nombre;
-    private String S_Nombre;
-    private String P_Apellido;
-    private String S_Apellido;
-    private Integer Edad;
-    private String Telefono;
+public class Usuario extends Persona{
+
     private Character Genero;
     private Double Altura_Inicio;
     private Double Peso_Inicio;
-    
-@OneToMany(mappedBy = "idRegRutina", cascade = CascadeType.ALL)
-    private List<Registro_Rutina> RegistroRutina;
 
-    @OneToMany(mappedBy = "idRegRutinaEntren", cascade = CascadeType.ALL)
-    private List<Registro_Rutina_Entrenamiento> regRutEnt;
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    private Cuenta cuenta;
 
-    @OneToMany(mappedBy = "idRegProgreso", cascade = CascadeType.ALL)
-    private List<Registro_progreso> registroProgreso;
+    @ManyToMany
+    @JoinTable(
+        name = "regsitro_entrenamiento", // Nombre de la tabla intermedia
+        joinColumns = @JoinColumn(name = "Id"), // Columna de esta entidad
+        inverseJoinColumns = @JoinColumn(name = "idEntrenamiento") // Columna de la otra entidad
+    )
+    private Set<Entrenamiento> Entrenamiento = new HashSet<>();
 
-    @OneToMany(mappedBy = "id_Usuario", cascade = CascadeType.ALL)
-    @JsonManagedReference  // Controla la serialización de la lista de cuentas
-    private List<Cuenta> cuentas;
+    @ManyToMany
+    @JoinTable(
+        name = "regsitro_rutina", // Nombre de la tabla intermedia
+        joinColumns = @JoinColumn(name = "Id"), // Columna de esta entidad
+        inverseJoinColumns = @JoinColumn(name = "id_Rutina") // Columna de la otra entidad
+    )
+    private Set<Rutina_Entrenamiento> Rutina_Entrenamiento = new HashSet<>();
 }

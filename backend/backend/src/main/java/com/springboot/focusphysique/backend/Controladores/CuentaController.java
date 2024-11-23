@@ -1,80 +1,74 @@
 package com.springboot.focusphysique.backend.Controladores;
 
-
-
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import com.springboot.focusphysique.backend.Entidades.Cuenta;
-import com.springboot.focusphysique.backend.Servicios.ICuentaService;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.springboot.focusphysique.backend.Entidades.Cuenta;
+import com.springboot.focusphysique.backend.Servicio.ICuentaServicio;
 
 @RestController
-@RequestMapping("/api/Cuentas")
-
+@RequestMapping("/api/cuenta")
 public class CuentaController {
-
     @Autowired
-    private ICuentaService cuentaService;
+    private ICuentaServicio cuentaServicio;
 
-    // Crear una nueva cuenta
-    @PostMapping
-    public Cuenta crearCuenta(@RequestBody Cuenta entity) {
-        return cuentaService.crearCuenta(entity);
-    }
-
-    //Mostrar todas las cuentas
     @GetMapping
-    public ResponseEntity<Iterable<Cuenta>> obtenerCuentas(){
-       return ResponseEntity.ok(cuentaService.ListarCuentas());
+    public ResponseEntity<Iterable<Cuenta>> getAllCuentas() {
+        return ResponseEntity.ok().body(cuentaServicio.obtenerCuentas());
     }
-    
-    //Buscar cuenta por ID
 
     @GetMapping("/{id}")
-    public ResponseEntity<Cuenta> obtenerCuentaPorId(@PathVariable Integer id) {
-        Optional<Cuenta> cuenta = cuentaService.BuscarCuentaId(id);
-        if(cuenta.isPresent()) {
-            return ResponseEntity.ok().body(cuenta.get());
+    public ResponseEntity<Cuenta> getCuentaPorId(@PathVariable Integer id) {
+        Optional<Cuenta> opUsuario = cuentaServicio.obtenerCuentaPorId(id);
+        if (opUsuario.isPresent()) {
+            return ResponseEntity.ok().body(opUsuario.get());
         }
-       
-        return cuenta.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return ResponseEntity.notFound().build();
     }
 
-    //Eliminar Cuenta
+    @PostMapping
+    public Cuenta crearCuenta(@RequestBody Cuenta entity) {
+        return cuentaServicio.crearCuenta(entity);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Cuenta> eliminarCuenta(@PathVariable(name = "id") Integer id) {
-        Optional<Cuenta> cuenta = cuentaService.EliminarCuenta(id);
-        if(cuenta.isPresent()){
-            return ResponseEntity.ok(cuenta.get());
-        }else{
+        Optional<Cuenta> cuenta = cuentaServicio.eliminarCuenta(id);
+        if (cuenta.isPresent()) {
+            return ResponseEntity.ok().body(cuenta.get());
+        } else {
             return ResponseEntity.notFound().build();
         }
     }
-    // Actualizar Cuenta
+
     @PutMapping("/{id}")
-    public ResponseEntity<Cuenta> ActualizarCuenta(@PathVariable Integer id,@RequestBody Cuenta datosCuenta){
-
-        try{
-            Cuenta cuentaActualizad = cuentaService.ActualizarCuenta(id,datosCuenta);
-            return ResponseEntity.ok(cuentaActualizad);
-        }catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
+    public ResponseEntity<Cuenta> actualizarCuenta(@PathVariable(name = "id") Integer id,
+            @RequestBody Cuenta cuentaOld) {
+                if (cuentaOld == null || cuentaOld.getUsuario() == null || cuentaOld.getContraseña() == null) {
+                    return ResponseEntity.badRequest().body(null);
+                }
+                // Buscar la cuenta existente por ID
+                Optional<Cuenta> cuentaOpt = cuentaServicio.obtenerCuentaPorId(id);
+                if (cuentaOpt.isPresent()) {
+                    Cuenta cuentaNew = cuentaOpt.get();
+                    // Actualizar campos necesarios
+                    cuentaNew.setUsuario(cuentaOld.getUsuario());
+                    cuentaNew.setContraseña(cuentaOld.getContraseña());
+                    // Guardar cambios
+                    Cuenta cuentaActualizada = cuentaServicio.crearCuenta(cuentaNew);
+                    return ResponseEntity.ok(cuentaActualizada);
+                }
+                // Si no encuentra la cuenta, retornar 404
+                return ResponseEntity.notFound().build();
     }
-    
-    
-    
-    
-
 }
