@@ -1,4 +1,4 @@
-package com.springboot.focusphysique.backend.Servicios;
+package com.springboot.focusphysique.backend.Servicio.impl;
 
 import org.springframework.stereotype.Service;
 

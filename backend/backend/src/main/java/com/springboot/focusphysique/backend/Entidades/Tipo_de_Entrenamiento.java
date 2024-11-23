@@ -1,12 +1,11 @@
 package com.springboot.focusphysique.backend.Entidades;
 
 
-import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import lombok.Data;
 
 
@@ -14,10 +13,8 @@ import lombok.Data;
 @Data
 public class Tipo_de_Entrenamiento {
     @Id
-    private Integer idTipoEntren;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idTipoEntrenamiento;
     private String nombreTipo;
     private String descripcion;
-
-    @OneToMany(mappedBy = "idEntrenamiento", cascade = CascadeType.ALL)
-    private List<Entrenamiento> entrenamientos;
 }
