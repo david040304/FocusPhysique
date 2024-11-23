@@ -1,6 +1,5 @@
 package com.springboot.focusphysique.backend.Entidades;
 
-
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -20,3 +19,4 @@ public class Cuenta {
     private Tipo_Cuenta tipocuenta;
 
 }
+
