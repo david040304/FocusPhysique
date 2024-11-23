@@ -3,6 +3,7 @@ package com.springboot.focusphysique.backend.Controladores;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,8 +38,9 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public Usuario crearUsuario(@RequestBody Usuario entity) {
-        return usuarioService.crearUsuario(entity);
+    public ResponseEntity<Usuario> crearUsuario(@RequestBody Usuario entity) {
+        Usuario nuevoUsuario = usuarioService.crearUsuario(entity);
+        return new ResponseEntity<>(nuevoUsuario, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")

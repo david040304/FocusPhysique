@@ -34,6 +34,4 @@ public class Rutina_Entrenamiento {
         inverseJoinColumns = @JoinColumn(name = "idEntrenamiento") // Columna de la otra entidad
     )
     private Set<Entrenamiento> Entrenamiento = new HashSet<>();
-
-    
 }

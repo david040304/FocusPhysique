@@ -1,5 +1,6 @@
 package com.springboot.focusphysique.backend.Entidades;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 import lombok.Data;
@@ -7,6 +8,7 @@ import lombok.Data;
 
 
 @Data
+@Entity
 public class Registro_progreso {
     @Id
     private Integer idRegProgreso;

@@ -3,7 +3,9 @@ package com.springboot.focusphysique.backend.Controladores;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,8 +29,9 @@ public class AdminController {
 
     //Configurar metodo para insertar
     @PostMapping
-    public Administrador crearAdministrador(@RequestBody Administrador entity){
-        return servicio.crearAdministrador(entity);
+    public ResponseEntity<Administrador> crearAdministrador(@RequestBody Administrador entity){
+        Administrador nuevAdmin = servicio.crearAdministrador(entity);
+        return new ResponseEntity<>(nuevAdmin, HttpStatus.CREATED);
     }
 
     //configurar metodo para obtnerAdmin
@@ -45,7 +48,15 @@ public class AdminController {
         }
         return ResponseEntity.notFound().build();
     }
-    
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Administrador> eliminarAdmin(@PathVariable(name = "id") Integer id) {
+        Optional<Administrador> Admin = servicio.eliminarAdmin(id);
+        if (Admin.isPresent()) {
+            return ResponseEntity.ok().body(Admin.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     //configurar metodo actualizarAdmin
     @PutMapping("/{id}")

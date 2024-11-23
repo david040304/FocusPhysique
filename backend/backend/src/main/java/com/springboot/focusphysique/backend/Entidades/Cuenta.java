@@ -1,5 +1,4 @@
 package com.springboot.focusphysique.backend.Entidades;
-import java.util.List;
 
 import jakarta.persistence.*;
 import lombok.Data;
