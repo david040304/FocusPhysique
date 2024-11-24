@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import lombok.Data;
@@ -36,5 +37,12 @@ public class Entrenamiento {
     @JoinColumn(name = "idTipoEntrenamiento")
     private Tipo_de_Entrenamiento tipo_de_Entrenamiento;
 
+    @ManyToMany
+    @JoinTable(
+    name = "registro_sugerencia", // Nombre de la tabla de unión
+    joinColumns = @JoinColumn(name = "idEntrenamiento"), // Columna que hace referencia a Entrenamiento
+    inverseJoinColumns = @JoinColumn(name = "idSugerencia") // Columna que hace referencia a Sugerencia
+    )
+private Set<Sugerencia> sugerencias = new HashSet<>();
 
 }

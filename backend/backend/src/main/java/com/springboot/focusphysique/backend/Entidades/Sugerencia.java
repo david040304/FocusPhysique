@@ -1,10 +1,14 @@
 package com.springboot.focusphysique.backend.Entidades;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
@@ -18,10 +22,11 @@ public class Sugerencia {
     private String tipoSugerencia;
 
     @ManyToOne
-    @JoinColumn(name = "idEntrenamiento")
-    private Entrenamiento entrenamiento;
-
-    @ManyToOne
     @JoinColumn(name = "id_Rutina")
     private Rutina_Entrenamiento rutina_Entrenamiento;
+
+    @ManyToMany(mappedBy = "sugerencias") // Aquí referenciamos la propiedad 'sugerencias' de Entrenamiento
+    private Set<Entrenamiento> entrenamientos = new HashSet<>();
+
+
 }
