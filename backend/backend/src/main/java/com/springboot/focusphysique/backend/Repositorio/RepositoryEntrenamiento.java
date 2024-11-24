@@ -15,7 +15,7 @@ public interface RepositoryEntrenamiento extends JpaRepository<Entrenamiento, In
     @Query("SELECT e.sugerencias FROM Entrenamiento e WHERE e.idEntrenamiento = :idEntrenamiento")
     Set<Sugerencia> findSugerenciasByEntrenamientoId(@Param("idEntrenamiento") Integer idEntrenamiento);
     
-    // Query para eliminar la relación entre entrenamiento y sugerencia en la tabla intermedia
+    /*Query para eliminar la relación entre entrenamiento y sugerencia en la tabla intermedia
     @Query(value = "DELETE FROM registro_sugerencia WHERE id_entrenamiento = :idEntrenamiento AND id_sugerencia = :idSugerencia", nativeQuery = true)
-    void eliminarRelacion(@Param("idEntrenamiento") Integer idEntrenamiento, @Param("idSugerencia") Integer idSugerencia);
+    void eliminarRelacion(@Param("idEntrenamiento") Integer idEntrenamiento, @Param("idSugerencia") Integer idSugerencia);*/
 }

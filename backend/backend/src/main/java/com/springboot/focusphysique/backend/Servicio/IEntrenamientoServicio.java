@@ -15,5 +15,4 @@ public interface IEntrenamientoServicio {
     Optional<Entrenamiento> eliminarEntren(Integer id);
     Set<Sugerencia> getSugerenciasByEntrenamientoId(Integer idEntrenamiento);
     Entrenamiento agregarSugerencia(Integer idEntrenamiento, Integer idSugerencia);
-    void eliminarRelacionEntrenamientoSugerencia(Integer idEntrenamiento, Integer idSugerencia);
 }

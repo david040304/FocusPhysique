@@ -118,12 +118,4 @@ public class EntrenamientoController {
         return ResponseEntity.ok(entrenamientoActualizado);
     }
 
-    @DeleteMapping("/{idEntrenamiento}/sugerencias/{idSugerencia}")
-    public ResponseEntity<Void> eliminarRelacionSugerencia(
-            @PathVariable Integer idEntrenamiento,
-            @PathVariable Integer idSugerencia) {
-        servicio.eliminarRelacionEntrenamientoSugerencia(idEntrenamiento, idSugerencia);
-        return ResponseEntity.ok().build();
-    }
-
 }

@@ -59,8 +59,4 @@ public class EntrenamientoServiceImpl implements IEntrenamientoServicio {
         return repo.save(entrenamiento.get()); // Guardar el entrenamiento actualizado
     }
 
-    @Override
-    public void eliminarRelacionEntrenamientoSugerencia(Integer idEntrenamiento, Integer idSugerencia) {
-        repo.eliminarRelacion(idEntrenamiento, idSugerencia);
-    }
 }
