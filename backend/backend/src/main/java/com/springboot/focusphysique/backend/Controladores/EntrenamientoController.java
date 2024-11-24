@@ -94,7 +94,7 @@ public class EntrenamientoController {
                     .body("El entrenamiento con el ID proporcionado no está registrado.");
         }
         // Recuperar las sugerencias asociadas al ID del entrenamiento
-        Set<Sugerencia> sugerencias = servicio.getSugerenciasByEntrenamientoId(id);
+        Set<Sugerencia> sugerencias = servicio.getSugeSerenciasByEntrenamientoId(id);
 
         // Verificar si el entrenamiento tiene sugerencias
         if (sugerencias == null || sugerencias.isEmpty()) {

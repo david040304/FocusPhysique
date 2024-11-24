@@ -13,6 +13,6 @@ public interface IEntrenamientoServicio {
     Optional<Entrenamiento> obtenerEntrenPorId(Integer id);
     Iterable<Entrenamiento> obtenerEntren();
     Optional<Entrenamiento> eliminarEntren(Integer id);
-    Set<Sugerencia> getSugerenciasByEntrenamientoId(Integer idEntrenamiento);
+    Set<Sugerencia> getSugeSerenciasByEntrenamientoId(Integer idEntrenamiento);
     Entrenamiento agregarSugerencia(Integer idEntrenamiento, Integer idSugerencia);
 }

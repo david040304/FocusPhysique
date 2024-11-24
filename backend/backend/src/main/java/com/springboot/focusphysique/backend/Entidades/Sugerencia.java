@@ -28,5 +28,7 @@ public class Sugerencia {
     @ManyToMany(mappedBy = "sugerencias") // Aquí referenciamos la propiedad 'sugerencias' de Entrenamiento
     private Set<Entrenamiento> entrenamientos = new HashSet<>();
 
+    @ManyToMany(mappedBy = "sugerencias") // Aquí referenciamos la propiedad 'sugerencias' de Entrenamiento
+    private Set<Rutina_Entrenamiento> rutina_Entrenamientos = new HashSet<>();
 
 }

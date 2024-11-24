@@ -43,7 +43,7 @@ public class EntrenamientoServiceImpl implements IEntrenamientoServicio {
     }
 
     @Override
-    public Set<Sugerencia> getSugerenciasByEntrenamientoId(Integer idEntrenamiento) {
+    public Set<Sugerencia> getSugeSerenciasByEntrenamientoId(Integer idEntrenamiento) {
         return repo.findSugerenciasByEntrenamientoId(idEntrenamiento);
     }
 

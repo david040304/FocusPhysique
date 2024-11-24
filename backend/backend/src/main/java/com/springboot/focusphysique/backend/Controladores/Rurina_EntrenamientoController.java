@@ -1,12 +1,16 @@
 package com.springboot.focusphysique.backend.Controladores;
 
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+
 import com.springboot.focusphysique.backend.Entidades.Rutina_Entrenamiento;
+import com.springboot.focusphysique.backend.Entidades.Sugerencia;
 import com.springboot.focusphysique.backend.Servicio.IRutinaEntrenamientoServicio;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -74,6 +78,20 @@ public class Rurina_EntrenamientoController {
                 // Si no encuentra la cuenta, retornar 404
                 return ResponseEntity.notFound().build();
     }
-    
 
+    @GetMapping("/{id}/sugerencias")
+    public Set<Sugerencia> obtenerSugerenciasPorRutinaId(@PathVariable Integer id) {
+        return rutinaServicio.obtenerSugerenciasPorRutinaId(id);
+    }
+
+    @PutMapping("/{idRutina}/sugerencias/{idSugerencia}")
+    public ResponseEntity<Rutina_Entrenamiento> agregarSugerencia(
+            @PathVariable Integer idRutina,
+            @PathVariable Integer idSugerencia) {
+            Rutina_Entrenamiento rutinaActualizada = rutinaServicio.agregarSugerencia(idRutina, idSugerencia);
+            if (rutinaActualizada == null){
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok(rutinaActualizada);
+    }
 }

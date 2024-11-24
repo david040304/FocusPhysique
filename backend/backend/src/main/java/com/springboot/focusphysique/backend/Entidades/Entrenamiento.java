@@ -43,6 +43,6 @@ public class Entrenamiento {
     joinColumns = @JoinColumn(name = "idEntrenamiento"), // Columna que hace referencia a Entrenamiento
     inverseJoinColumns = @JoinColumn(name = "idSugerencia") // Columna que hace referencia a Sugerencia
     )
-private Set<Sugerencia> sugerencias = new HashSet<>();
+    private Set<Sugerencia> sugerencias = new HashSet<>();
 
 }

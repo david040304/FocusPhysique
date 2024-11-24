@@ -18,7 +18,7 @@ import lombok.Data;
 public class Rutina_Entrenamiento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_Rutina;
+    private Integer idRutina;
     private String nombre;
     private String descripcion;
     private Time duracion;
@@ -34,4 +34,12 @@ public class Rutina_Entrenamiento {
         inverseJoinColumns = @JoinColumn(name = "idEntrenamiento") // Columna de la otra entidad
     )
     private Set<Entrenamiento> Entrenamiento = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(
+    name = "registro_Rutina_sugerencia", // Nombre de la tabla de unión
+    joinColumns = @JoinColumn(name = "id_Rutina"), // Columna que hace referencia a Rutina Entrenamiento
+    inverseJoinColumns = @JoinColumn(name = "id_Sugerencia") // Columna que hace referencia a Sugerencia
+    )
+    private Set<Sugerencia> sugerencias = new HashSet<>();
 }
