@@ -23,7 +23,6 @@ public class SugerenciaController {
      // Configurar los métodos
     @Autowired
     private ISugerenciaSercio Servicio;
-   
 
     // Métodos para crear
     @PostMapping
@@ -67,7 +66,6 @@ public class SugerenciaController {
         if(Sugerencia.isPresent()){
             Sugerencia SugerenciaNew = Sugerencia.get();
             SugerenciaNew.setDescripcion(sugerenciaOld.getDescripcion());
-            SugerenciaNew.setTipoSugerencia(sugerenciaOld.getTipoSugerencia());
             return ResponseEntity.ok(Servicio.crearSugerencia(SugerenciaNew));
         }
         return ResponseEntity.notFound().build();

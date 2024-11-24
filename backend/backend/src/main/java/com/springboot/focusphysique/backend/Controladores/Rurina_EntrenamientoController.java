@@ -84,6 +84,7 @@ public class Rurina_EntrenamientoController {
         return rutinaServicio.obtenerSugerenciasPorRutinaId(id);
     }
 
+    // Método para agregar una sugerencia a un Rutina de entrenamiento
     @PutMapping("/{idRutina}/sugerencias/{idSugerencia}")
     public ResponseEntity<Rutina_Entrenamiento> agregarSugerencia(
             @PathVariable Integer idRutina,
