@@ -78,4 +78,9 @@ public class EntrenamientoServiceImpl implements IEntrenamientoServicio {
     public List<Entrenamiento> findByTipoDeEntrenamientoNombre(String nombreTipo) {
         return repo.findByTipoDeEntrenamientoNombre(nombreTipo);
     }
+
+    @Override
+    public void eliminarSugerenciaPorEntrenamientoId(Integer idEntrenamiento, Integer idSugerencia) {
+        repo.deleteSugerenciaByEntrenamientoId(idEntrenamiento, idSugerencia);
+    }
 }
