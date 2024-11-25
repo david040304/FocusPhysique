@@ -106,4 +106,13 @@ public class UsuarioController {
         // Retornar las sugerencias si existen
         return ResponseEntity.ok(entrenamientos);
     }
+
+    // Eliminar un entrenamiento por ID de usuario e ID de entrenamiento
+    @DeleteMapping("/{idUsuario}/entrenamientos/{idEntrenamiento}")
+    public ResponseEntity<Void> eliminarEntrenamiento(
+            @PathVariable Integer idUsuario,
+            @PathVariable Integer idEntrenamiento) {
+        usuarioService.eliminarEntrenamientoPorUsuarioId(idUsuario, idEntrenamiento);
+        return ResponseEntity.noContent().build();
+    }
 }

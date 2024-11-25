@@ -12,6 +12,8 @@ import com.springboot.focusphysique.backend.Repositorio.RepositoryEntrenamiento;
 import com.springboot.focusphysique.backend.Repositorio.RepositoryUsuario;
 import com.springboot.focusphysique.backend.Servicio.IUsuarioServicio;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class UsuarioServiceImpl implements IUsuarioServicio{
     @Autowired
@@ -57,6 +59,11 @@ public class UsuarioServiceImpl implements IUsuarioServicio{
         }
         usuario.get().getEntrenamiento().add(entrenamiento.get());
         return repo.save(usuario.get());
+    }
+
+    @Override
+    public void eliminarEntrenamientoPorUsuarioId(Integer id, Integer idEntrenamiento) {
+        repo.deleteEntrenamientoByUsuarioId(id, idEntrenamiento);
     }
 
     

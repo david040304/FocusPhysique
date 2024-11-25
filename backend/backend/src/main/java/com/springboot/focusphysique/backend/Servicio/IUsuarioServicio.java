@@ -13,4 +13,5 @@ public interface IUsuarioServicio {
     Optional<Usuario> eliminarUsuario(Integer id);
     Set<Entrenamiento> getEntrenamientosByUsuarioId(Integer id);
     Usuario agregarEntrenamientUsuario(Integer id, Integer idEntrenamiento);
+    void eliminarEntrenamientoPorUsuarioId(Integer id, Integer idEntrenamiento);
 }
