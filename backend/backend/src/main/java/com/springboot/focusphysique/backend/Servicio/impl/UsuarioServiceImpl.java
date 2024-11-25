@@ -1,11 +1,14 @@
 package com.springboot.focusphysique.backend.Servicio.impl;
 
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.springboot.focusphysique.backend.Entidades.Entrenamiento;
 import com.springboot.focusphysique.backend.Entidades.Usuario;
+import com.springboot.focusphysique.backend.Repositorio.RepositoryEntrenamiento;
 import com.springboot.focusphysique.backend.Repositorio.RepositoryUsuario;
 import com.springboot.focusphysique.backend.Servicio.IUsuarioServicio;
 
@@ -13,6 +16,9 @@ import com.springboot.focusphysique.backend.Servicio.IUsuarioServicio;
 public class UsuarioServiceImpl implements IUsuarioServicio{
     @Autowired
     private RepositoryUsuario repo;
+
+    @Autowired
+    private RepositoryEntrenamiento repoEntrenamiento;
 
     @Override
     public Usuario crearUsuario(Usuario datosUsuario) {
@@ -36,4 +42,22 @@ public class UsuarioServiceImpl implements IUsuarioServicio{
             return usuario;
         });
     }
+
+    @Override
+    public Set<Entrenamiento> getEntrenamientosByUsuarioId(Integer id) {
+        return repo.findEntrenamientoByUsuarioId(id);
+    }
+
+    @Override
+    public Usuario agregarEntrenamientUsuario(Integer id, Integer idEntrenamiento) {
+        Optional<Usuario> usuario = repo.findById(id);
+        Optional<Entrenamiento> entrenamiento = repoEntrenamiento.findById(idEntrenamiento);
+        if(!usuario.isPresent() || !entrenamiento.isPresent()) {
+            return null; // Si no se encuentra el usuario o el entrenamiento, no se puede agregar
+        }
+        usuario.get().getEntrenamiento().add(entrenamiento.get());
+        return repo.save(usuario.get());
+    }
+
+    
 }

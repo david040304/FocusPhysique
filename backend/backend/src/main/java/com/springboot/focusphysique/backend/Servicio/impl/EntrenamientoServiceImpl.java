@@ -1,5 +1,6 @@
 package com.springboot.focusphysique.backend.Servicio.impl;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -59,4 +60,22 @@ public class EntrenamientoServiceImpl implements IEntrenamientoServicio {
         return repo.save(entrenamiento.get()); // Guardar el entrenamiento actualizado
     }
 
+    @Override
+    public List<Entrenamiento> findByGenero(Character genero) {
+        return repo.findByGenero(genero);
+    }
+
+    @Override
+    public List<Entrenamiento> findByNivelDificultad(String nivelDificultad) {
+        return repo.findByNivelDificultad(nivelDificultad);
+    }
+    @Override
+    public List<Entrenamiento> findByGrupoMuscular(String grupoMuscular) {
+        return repo.findByGrupoMuscular(grupoMuscular);
+    }
+
+    @Override
+    public List<Entrenamiento> findByTipoDeEntrenamientoNombre(String nombreTipo) {
+        return repo.findByTipoDeEntrenamientoNombre(nombreTipo);
+    }
 }
