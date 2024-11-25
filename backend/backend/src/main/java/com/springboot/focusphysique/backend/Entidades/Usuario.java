@@ -25,7 +25,7 @@ public class Usuario extends Persona{
 
     @ManyToMany
     @JoinTable(
-        name = "regsitro_entrenamiento", // Nombre de la tabla intermedia
+        name = "registro_entrenamiento", // Nombre de la tabla intermedia
         joinColumns = @JoinColumn(name = "Id"), // Columna de esta entidad
         inverseJoinColumns = @JoinColumn(name = "idEntrenamiento") // Columna de la otra entidad
     )

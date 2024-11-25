@@ -1,5 +1,6 @@
 package com.springboot.focusphysique.backend.Controladores;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -96,13 +97,11 @@ public class EntrenamientoController {
         }
         // Recuperar las sugerencias asociadas al ID del entrenamiento
         Set<Sugerencia> sugerencias = servicio.getSugeSerenciasByEntrenamientoId(id);
-
         // Verificar si el entrenamiento tiene sugerencias
         if (sugerencias == null || sugerencias.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("El entrenamiento existe pero no cuenta con sugerencias asociadas.");
         }
-
         // Retornar las sugerencias si existen
         return ResponseEntity.ok(sugerencias);
     }
@@ -119,4 +118,31 @@ public class EntrenamientoController {
         return ResponseEntity.ok(entrenamientoActualizado);
     }
 
+    // Endpoint para obtener entrenamientos por género
+    @GetMapping("/genero/{genero}")
+    public List<Entrenamiento> obtenerEntrenamientosPorGenero(@PathVariable Character genero) {
+        return servicio.findByGenero(genero);
+    }
+
+    // Endpoint para obtener entrenamientos por nivel de dificultad
+    @GetMapping("/nivelDificultad/{nivelDificultad}")
+    public List<Entrenamiento> obtenerEntrenamientosPorNivelDificultad(@PathVariable String nivelDificultad) {
+        return servicio.findByNivelDificultad(nivelDificultad);
+    }
+
+    // Endpoint para obtener entrenamientos por grupo muscular
+    @GetMapping("/grupoMuscular/{grupoMuscular}")
+    public List<Entrenamiento> obtenerEntrenamientosPorGrupoMuscular(@PathVariable String grupoMuscular) {
+        return servicio.findByGrupoMuscular(grupoMuscular);
+    }
+
+    @GetMapping("/filtro/tipo/{nombreTipo}")
+public ResponseEntity<List<Entrenamiento>> getEntrenamientosPorTipo(@PathVariable String nombreTipo) {
+    List<Entrenamiento> entrenamientos = servicio.findByTipoDeEntrenamientoNombre(nombreTipo);
+    if (entrenamientos.isEmpty()) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(null); // Devuelve un código 404 si no hay resultados
+    }
+    return ResponseEntity.ok(entrenamientos); // Devuelve los entrenamientos filtrados
+}
 }

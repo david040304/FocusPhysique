@@ -1,6 +1,7 @@
 package com.springboot.focusphysique.backend.Controladores;
 
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springboot.focusphysique.backend.Entidades.Entrenamiento;
+import com.springboot.focusphysique.backend.Entidades.Sugerencia;
 import com.springboot.focusphysique.backend.Entidades.Usuario;
 import com.springboot.focusphysique.backend.Servicio.IUsuarioServicio;
 
@@ -71,5 +74,45 @@ public class UsuarioController {
             return ResponseEntity.ok(usuarioService.crearUsuario(usuarioNew));
         }
         return ResponseEntity.notFound().build();
+    }
+
+    // Método para agregar un Entrenamiento a un usuario
+    @PutMapping("/{id}/entrenamiento/{idEntrenamiento}")
+    public ResponseEntity<Usuario> agregarEntrenamientUsuario(
+            @PathVariable Integer id, 
+            @PathVariable Integer idEntrenamiento) {
+        Usuario usuarioActualizado = usuarioService.agregarEntrenamientUsuario(id, idEntrenamiento);
+        if (usuarioActualizado == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(usuarioActualizado);
+    }
+
+    @GetMapping("/{id}/entrenamiento")
+    public ResponseEntity<?> getEntrenamiento(@PathVariable Integer id) {
+        // Verificar si el entrenamiento existe
+        Optional<Usuario> usuario = usuarioService.obtenerUsuarioPorId(id);
+        if (usuario == null || usuario.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("El entrenamiento con el ID proporcionado no está registrado.");
+        }
+        // Recuperar las sugerencias asociadas al ID del entrenamiento
+        Set<Entrenamiento> entrenamientos = usuarioService.getEntrenamientosByUsuarioId(id);
+        // Verificar si el entrenamiento tiene sugerencias
+        if (entrenamientos == null || entrenamientos.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("El entrenamiento existe pero no cuenta con sugerencias asociadas.");
+        }
+        // Retornar las sugerencias si existen
+        return ResponseEntity.ok(entrenamientos);
+    }
+
+    // Eliminar un entrenamiento por ID de usuario e ID de entrenamiento
+    @DeleteMapping("/{idUsuario}/entrenamientos/{idEntrenamiento}")
+    public ResponseEntity<Void> eliminarEntrenamiento(
+            @PathVariable Integer idUsuario,
+            @PathVariable Integer idEntrenamiento) {
+        usuarioService.eliminarEntrenamientoPorUsuarioId(idUsuario, idEntrenamiento);
+        return ResponseEntity.noContent().build();
     }
 }

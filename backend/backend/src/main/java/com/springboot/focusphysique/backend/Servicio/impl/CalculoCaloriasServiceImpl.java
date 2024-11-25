@@ -1,6 +1,5 @@
 package com.springboot.focusphysique.backend.Servicio.impl;
 
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +14,7 @@ import com.springboot.focusphysique.backend.Servicio.ICalculoCaloriasService;
 public class CalculoCaloriasServiceImpl implements ICalculoCaloriasService {
     @Autowired
     private RepositoryUsuario repoUsuario;
+    @Autowired
     private RepositoryEntrenamiento repoEntre;
 
    /*  public CalculoCaloriasServiceImpl(RepositoryUsuario repoUsuario, RepositoryEntrenamiento repoEntre){
@@ -35,7 +35,7 @@ public class CalculoCaloriasServiceImpl implements ICalculoCaloriasService {
         }
         // conversion  de time a minutos 
         int duracionMinutos = entrenamiento.getDuracion().toLocalTime().getHour()*60
-                             + entrenamiento.getDuracion().toLocalTime().getMinute();
+                            + entrenamiento.getDuracion().toLocalTime().getMinute();
         // Fórmula de cálculo de calorías
         return entrenamiento.getMet() * 3.5 * usuario.getPeso_Inicio() * duracionMinutos / 200;
 
