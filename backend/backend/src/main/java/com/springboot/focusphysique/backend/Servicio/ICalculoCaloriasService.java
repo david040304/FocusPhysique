@@ -1,6 +1,6 @@
 package com.springboot.focusphysique.backend.Servicio;
 
 public interface ICalculoCaloriasService {
-    Double calcularCalorias(Integer id, Integer entrenamientoId) throws IllegalArgumentException; 
+    Double calcularCalorias(Integer id, Integer idEntrenamiento) throws IllegalArgumentException; 
 
 }

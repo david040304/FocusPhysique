@@ -18,8 +18,8 @@ public class CalculoCaloriasController {
         @GetMapping("/calcular")
     public ResponseEntity<Double> calcularCalorias(
             @RequestParam Integer id,
-            @RequestParam Integer entrenamientoId) {
-        Double caloriasQuemadas = ICalculoCaloriasService.calcularCalorias(id, entrenamientoId);
+            @RequestParam Integer idEntrenamiento) {
+        Double caloriasQuemadas = ICalculoCaloriasService.calcularCalorias(id, idEntrenamiento);
         return ResponseEntity.ok(caloriasQuemadas);
     }
 

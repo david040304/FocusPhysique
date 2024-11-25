@@ -22,12 +22,12 @@ public class CalculoCaloriasServiceImpl implements ICalculoCaloriasService {
         this.repoEntre = repoEntre;
     }*/
     @Override
-    public Double calcularCalorias(Integer id, Integer entrenamientoId) throws IllegalArgumentException{
+    public Double calcularCalorias(Integer id, Integer idEntrenamiento) throws IllegalArgumentException{
 
         Usuario usuario = repoUsuario.findById(id)
         .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
 
-        Entrenamiento entrenamiento = repoEntre.findById(entrenamientoId)
+        Entrenamiento entrenamiento = repoEntre.findById(idEntrenamiento)
         .orElseThrow(() -> new IllegalArgumentException("El entrenamiento no existe"));
 
         if(usuario.getPeso_Inicio() == null || entrenamiento.getMet() == null || entrenamiento.getDuracion() == null){
