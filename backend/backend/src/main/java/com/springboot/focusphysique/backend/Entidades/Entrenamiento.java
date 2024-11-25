@@ -1,6 +1,7 @@
 package com.springboot.focusphysique.backend.Entidades;
 
 
+import java.sql.Time;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,6 +26,7 @@ public class Entrenamiento {
     private String grupoMuscular;
     private String nivelDificultad;
     private Character genero;
+    private Time duracion;
     private Double met;
 
     @ManyToMany(mappedBy = "Entrenamiento") // Relación bidireccional

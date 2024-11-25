@@ -72,6 +72,7 @@ public class EntrenamientoController {
                     entrenNew.setGrupoMuscular(entrenOld.getGrupoMuscular());
                     entrenNew.setNivelDificultad(entrenOld.getNivelDificultad());
                     entrenNew.setGenero(entrenOld.getGenero());
+                    entrenNew.setDuracion(entrenOld.getDuracion());
                     entrenNew.setMet(entrenOld.getMet());
                     return ResponseEntity.ok(servicio.crearEntrenamiento(entrenNew));
                     
