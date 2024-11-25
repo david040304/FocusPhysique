@@ -79,14 +79,8 @@ public class EntrenamientoController {
                     
                 }
                 return ResponseEntity.notFound().build();
+    }
 
-            }
-
-    /*@GetMapping("/{id}/sugerencias")
-    public ResponseEntity<Set<Sugerencia>> getSugerencias(@PathVariable Integer id) {
-        Set<Sugerencia> sugerencias = servicio.getSugerenciasByEntrenamientoId(id);
-        return ResponseEntity.ok(sugerencias);
-    }*/
     @GetMapping("/{id}/sugerencias")
     public ResponseEntity<?> getSugerencias(@PathVariable Integer id) {
         // Verificar si el entrenamiento existe
@@ -116,6 +110,15 @@ public class EntrenamientoController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(entrenamientoActualizado);
+    }
+
+    // Eliminar una Sugerencia por ID de Sugerencia e ID de entrenamiento
+    @DeleteMapping("/{idEntrenamiento}/entrenamientos/{idSugerencia}")
+    public ResponseEntity<Void> eliminarSugerencia(
+            @PathVariable Integer idEntrenamiento,
+            @PathVariable Integer idSugerencia) {
+        servicio.eliminarSugerenciaPorEntrenamientoId(idEntrenamiento, idSugerencia);
+        return ResponseEntity.noContent().build();
     }
 
     // Endpoint para obtener entrenamientos por género

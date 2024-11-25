@@ -21,6 +21,7 @@ public interface IEntrenamientoServicio {
     List<Entrenamiento> findByNivelDificultad(String nivelDificultad);
     List<Entrenamiento> findByGrupoMuscular(String grupoMuscular);
     List<Entrenamiento> findByTipoDeEntrenamientoNombre(@Param("nombreTipo") String nombreTipo);
-    
+    void eliminarSugerenciaPorEntrenamientoId(Integer idEntrenamiento, Integer idSugerencia);
+
 
 }
