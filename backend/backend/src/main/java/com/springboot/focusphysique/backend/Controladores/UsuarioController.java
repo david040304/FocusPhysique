@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.focusphysique.backend.Entidades.Entrenamiento;
+import com.springboot.focusphysique.backend.Entidades.Rutina_Entrenamiento;
 import com.springboot.focusphysique.backend.Entidades.Usuario;
 import com.springboot.focusphysique.backend.Servicio.IUsuarioServicio;
 
@@ -86,6 +87,17 @@ public class UsuarioController {
         }
         return ResponseEntity.ok(usuarioActualizado);
     }
+    // Método para agregar un Entrenamiento a un usuario
+    @PutMapping("/{id}/rutinaEntrenamiento/{idRutina}")
+    public ResponseEntity<Usuario> agregarRutinaUsuario(
+            @PathVariable Integer id, 
+            @PathVariable Integer idRutina) {
+        Usuario usuarioActualizado = usuarioService.agregarRutinaUsuario(id, idRutina);
+        if (usuarioActualizado == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(usuarioActualizado);
+    }
 
     @GetMapping("/{id}/entrenamiento")
     public ResponseEntity<?> getEntrenamiento(@PathVariable Integer id) {
@@ -106,12 +118,39 @@ public class UsuarioController {
         return ResponseEntity.ok(entrenamientos);
     }
 
+    @GetMapping("/{id}/rutinaEntrenamiento")
+    public ResponseEntity<?> getRutina(@PathVariable Integer id) {
+        // Verificar si el entrenamiento existe
+        Optional<Usuario> usuario = usuarioService.obtenerUsuarioPorId(id);
+        if (usuario == null || usuario.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("La Rutina con el ID proporcionado no está registrado.");
+        }
+        // Recuperar las sugerencias asociadas al ID del entrenamiento
+        Set<Rutina_Entrenamiento> rutinas = usuarioService.getRutinasByUsuarioId(id);
+        // Verificar si el entrenamiento tiene sugerencias
+        if (rutinas == null || rutinas.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("El entrenamiento existe pero no cuenta con Rutinas de entrenameinto asociadas.");
+        }
+        // Retornar las sugerencias si existen
+        return ResponseEntity.ok(rutinas);
+    }
+
     // Eliminar un entrenamiento por ID de usuario e ID de entrenamiento
-    @DeleteMapping("/{id}/entrenamiento/{idEntrenamiento}")
+    @DeleteMapping("/{id}/entrenamiento/{idRutina}")
     public ResponseEntity<Void> eliminarEntrenamiento(
             @PathVariable Integer id,
             @PathVariable Integer idEntrenamiento) {
         usuarioService.eliminarEntrenamientoPorUsuarioId(id, idEntrenamiento);
+        return ResponseEntity.noContent().build();
+    }
+    // Eliminar un entrenamiento por ID de usuario e ID de entrenamiento
+    @DeleteMapping("/{id}/rutinaEntrenamiento/{idRutina}")
+    public ResponseEntity<Void> eliminarRutina(
+            @PathVariable Integer id,
+            @PathVariable Integer idRutina) {
+        usuarioService.eliminarEntrenamientoPorUsuarioId(id, idRutina);
         return ResponseEntity.noContent().build();
     }
 }

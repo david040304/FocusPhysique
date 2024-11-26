@@ -4,6 +4,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import com.springboot.focusphysique.backend.Entidades.Entrenamiento;
+import com.springboot.focusphysique.backend.Entidades.Rutina_Entrenamiento;
 import com.springboot.focusphysique.backend.Entidades.Usuario;
 
 public interface IUsuarioServicio {
@@ -14,4 +15,7 @@ public interface IUsuarioServicio {
     Set<Entrenamiento> getEntrenamientosByUsuarioId(Integer id);
     Usuario agregarEntrenamientUsuario(Integer id, Integer idEntrenamiento);
     void eliminarEntrenamientoPorUsuarioId(Integer id, Integer idEntrenamiento);
+    Set<Rutina_Entrenamiento> getRutinasByUsuarioId(Integer id);
+    Usuario agregarRutinaUsuario(Integer id, Integer idRutina);
+    void eliminarRutinaPorUsuarioId(Integer id, Integer idRutina);
 }
