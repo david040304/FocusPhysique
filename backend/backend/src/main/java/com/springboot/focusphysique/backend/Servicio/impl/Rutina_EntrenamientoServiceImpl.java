@@ -58,4 +58,9 @@ public class Rutina_EntrenamientoServiceImpl implements IRutinaEntrenamientoServ
         rutina.get().getSugerencias().add(sugerencia.get());
         return repo.save(rutina.get()); // Guardar la rutina actualizada
     }
+
+    @Override
+    public void eliminarSugerenciaPorRutinaId(Integer idRutina, Integer idSugerencia) {
+        repo.deleteSugerenciaByRutinaId(idRutina, idSugerencia);
+    }
 }

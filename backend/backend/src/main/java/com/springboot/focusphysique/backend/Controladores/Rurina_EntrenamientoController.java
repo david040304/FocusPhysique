@@ -95,4 +95,13 @@ public class Rurina_EntrenamientoController {
             }
             return ResponseEntity.ok(rutinaActualizada);
     }
+
+    // Eliminar una Sugerencia por ID de Sugerencia e ID de Rutina
+    @DeleteMapping("/{idRutina}/rutina_Entrenamientos/{idSugerencia}")
+    public ResponseEntity<Void> eliminarSugerencia(
+            @PathVariable Integer idRutina,
+            @PathVariable Integer idSugerencia) {
+        rutinaServicio.eliminarSugerenciaPorRutinaId(idRutina, idSugerencia);
+        return ResponseEntity.noContent().build();
+    }
 }

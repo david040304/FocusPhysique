@@ -9,7 +9,6 @@ import { AppProvider } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { PageContainer } from '@toolpad/core/PageContainer';
 import Grid from '@mui/material/Grid2';
-import PropTypes from 'prop-types';
 
 const NAVIGATION = [
   {
@@ -149,10 +148,3 @@ export default function DashboardLayoutBasic(props) {
     </AppProvider>
   );
 }
-DashboardLayoutBasic.propTypes = {
-    window: PropTypes.func,
-  };
-  
-  DashboardLayoutBasic.defaultProps = {
-    window: undefined,
-  }

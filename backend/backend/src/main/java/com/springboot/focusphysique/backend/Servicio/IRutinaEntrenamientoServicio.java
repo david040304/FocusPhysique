@@ -13,4 +13,6 @@ public interface IRutinaEntrenamientoServicio {
     Optional<Rutina_Entrenamiento> eliminarRutina(Integer id);
     Set<Sugerencia> obtenerSugerenciasPorRutinaId(Integer idRutina);
     Rutina_Entrenamiento agregarSugerencia(Integer idRutina, Integer idSugerencia);
+    void eliminarSugerenciaPorRutinaId(Integer idRutina, Integer idSugerencia);
+
 }
