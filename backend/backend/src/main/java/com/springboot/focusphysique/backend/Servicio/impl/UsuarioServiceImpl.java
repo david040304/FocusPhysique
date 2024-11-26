@@ -12,8 +12,6 @@ import com.springboot.focusphysique.backend.Repositorio.RepositoryEntrenamiento;
 import com.springboot.focusphysique.backend.Repositorio.RepositoryUsuario;
 import com.springboot.focusphysique.backend.Servicio.IUsuarioServicio;
 
-import jakarta.transaction.Transactional;
-
 @Service
 public class UsuarioServiceImpl implements IUsuarioServicio{
     @Autowired

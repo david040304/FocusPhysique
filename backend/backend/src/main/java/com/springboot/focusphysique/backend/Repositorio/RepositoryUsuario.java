@@ -19,6 +19,9 @@ public interface RepositoryUsuario extends JpaRepository<Usuario, Integer> {
 
     @Modifying
     @Transactional
-    @Query("DELETE FROM Entrenamiento re WHERE re.id = :id AND re.idEntrenamiento = :idEntrenamiento")
+    @Query(
+        value = "DELETE FROM registro_entrenamiento re WHERE re.id = :id AND re.id_Entrenamiento = :idEntrenamiento",
+    nativeQuery = true
+    )
     void deleteEntrenamientoByUsuarioId(@Param("id") Integer id, @Param("idEntrenamiento") Integer idEntrenamiento);
 }

@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.focusphysique.backend.Entidades.Entrenamiento;
-import com.springboot.focusphysique.backend.Entidades.Sugerencia;
 import com.springboot.focusphysique.backend.Entidades.Usuario;
 import com.springboot.focusphysique.backend.Servicio.IUsuarioServicio;
 
@@ -41,8 +40,8 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<Usuario> crearUsuario(@RequestBody Usuario entity) {
-        Usuario nuevoUsuario = usuarioService.crearUsuario(entity);
+    public ResponseEntity<Usuario> crearUsuario(@RequestBody Usuario datosUsuario) {
+        Usuario nuevoUsuario = usuarioService.crearUsuario(datosUsuario);
         return new ResponseEntity<>(nuevoUsuario, HttpStatus.CREATED);
     }
 
@@ -108,11 +107,11 @@ public class UsuarioController {
     }
 
     // Eliminar un entrenamiento por ID de usuario e ID de entrenamiento
-    @DeleteMapping("/{idUsuario}/entrenamientos/{idEntrenamiento}")
+    @DeleteMapping("/{id}/entrenamiento/{idEntrenamiento}")
     public ResponseEntity<Void> eliminarEntrenamiento(
-            @PathVariable Integer idUsuario,
+            @PathVariable Integer id,
             @PathVariable Integer idEntrenamiento) {
-        usuarioService.eliminarEntrenamientoPorUsuarioId(idUsuario, idEntrenamiento);
+        usuarioService.eliminarEntrenamientoPorUsuarioId(id, idEntrenamiento);
         return ResponseEntity.noContent().build();
     }
 }
