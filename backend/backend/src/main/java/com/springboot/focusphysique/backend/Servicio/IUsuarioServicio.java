@@ -11,7 +11,7 @@ public interface IUsuarioServicio {
     Usuario crearUsuario(Usuario datosUsuario);
     Optional<Usuario> obtenerUsuarioPorId(Integer id);
     Iterable<Usuario> obtenerUsuarios();
-    Optional<Usuario> eliminarUsuario(Integer id);
+    void eliminarUsuario(Integer id);
     Set<Entrenamiento> getEntrenamientosByUsuarioId(Integer id);
     Usuario agregarEntrenamientUsuario(Integer id, Integer idEntrenamiento);
     void eliminarEntrenamientoPorUsuarioId(Integer id, Integer idEntrenamiento);

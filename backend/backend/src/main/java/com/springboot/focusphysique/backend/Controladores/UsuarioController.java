@@ -47,12 +47,14 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Usuario> eliminarUsuario(@PathVariable(name = "id") Integer id) {
-        Optional<Usuario> usuario = usuarioService.eliminarUsuario(id);
-        if (usuario.isPresent()) {
-            return ResponseEntity.ok().body(usuario.get());
-        } else {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<String> eliminarUsuario(@PathVariable Integer id) {
+        try {
+            usuarioService.eliminarUsuario(id);
+            return ResponseEntity.ok("Usuario eliminado correctamente.");
+        } catch (RuntimeException e) {
+            // Manejo de excepciones para cuando no se pueda eliminar el usuario
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("Error al eliminar el usuario: " + e.getMessage());
         }
     }
 
@@ -103,14 +105,14 @@ public class UsuarioController {
     public ResponseEntity<?> getEntrenamiento(@PathVariable Integer id) {
         // Verificar si el entrenamiento existe
         Optional<Usuario> usuario = usuarioService.obtenerUsuarioPorId(id);
-        if (usuario == null || usuario.isEmpty()) {
+        if (!usuario.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("El entrenamiento con el ID proporcionado no está registrado.");
         }
         // Recuperar las sugerencias asociadas al ID del entrenamiento
         Set<Entrenamiento> entrenamientos = usuarioService.getEntrenamientosByUsuarioId(id);
         // Verificar si el entrenamiento tiene sugerencias
-        if (entrenamientos == null || entrenamientos.isEmpty()) {
+        if (entrenamientos.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("El entrenamiento existe pero no cuenta con sugerencias asociadas.");
         }
@@ -122,14 +124,14 @@ public class UsuarioController {
     public ResponseEntity<?> getRutina(@PathVariable Integer id) {
         // Verificar si el entrenamiento existe
         Optional<Usuario> usuario = usuarioService.obtenerUsuarioPorId(id);
-        if (usuario == null || usuario.isEmpty()) {
+        if (!usuario.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("La Rutina con el ID proporcionado no está registrado.");
         }
         // Recuperar las sugerencias asociadas al ID del entrenamiento
         Set<Rutina_Entrenamiento> rutinas = usuarioService.getRutinasByUsuarioId(id);
         // Verificar si el entrenamiento tiene sugerencias
-        if (rutinas == null || rutinas.isEmpty()) {
+        if (rutinas.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("El entrenamiento existe pero no cuenta con Rutinas de entrenameinto asociadas.");
         }
@@ -138,7 +140,7 @@ public class UsuarioController {
     }
 
     // Eliminar un entrenamiento por ID de usuario e ID de entrenamiento
-    @DeleteMapping("/{id}/entrenamiento/{idRutina}")
+    @DeleteMapping("/{id}/entrenamiento/{idEntrenamiento}")
     public ResponseEntity<Void> eliminarEntrenamiento(
             @PathVariable Integer id,
             @PathVariable Integer idEntrenamiento) {
@@ -150,7 +152,7 @@ public class UsuarioController {
     public ResponseEntity<Void> eliminarRutina(
             @PathVariable Integer id,
             @PathVariable Integer idRutina) {
-        usuarioService.eliminarEntrenamientoPorUsuarioId(id, idRutina);
+        usuarioService.eliminarRutinaPorUsuarioId(id, idRutina);
         return ResponseEntity.noContent().build();
     }
 }

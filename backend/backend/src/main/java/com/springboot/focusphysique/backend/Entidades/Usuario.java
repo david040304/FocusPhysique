@@ -23,15 +23,16 @@ public class Usuario extends Persona{
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Cuenta cuenta;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
         name = "registro_entrenamiento", // Nombre de la tabla intermedia
         joinColumns = @JoinColumn(name = "Id"), // Columna de esta entidad
         inverseJoinColumns = @JoinColumn(name = "idEntrenamiento") // Columna de la otra entidad
     )
+    
     private Set<Entrenamiento> Entrenamiento = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
         name = "regsitro_rutina", // Nombre de la tabla intermedia
         joinColumns = @JoinColumn(name = "Id"), // Columna de esta entidad

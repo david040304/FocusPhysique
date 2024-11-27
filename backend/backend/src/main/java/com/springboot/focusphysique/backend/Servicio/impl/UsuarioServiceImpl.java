@@ -4,6 +4,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.springboot.focusphysique.backend.Entidades.Entrenamiento;
@@ -13,6 +14,8 @@ import com.springboot.focusphysique.backend.Repositorio.RepositoryEntrenamiento;
 import com.springboot.focusphysique.backend.Repositorio.RepositoryRutina_Entrenamiento;
 import com.springboot.focusphysique.backend.Repositorio.RepositoryUsuario;
 import com.springboot.focusphysique.backend.Servicio.IUsuarioServicio;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class UsuarioServiceImpl implements IUsuarioServicio{
@@ -40,12 +43,25 @@ public class UsuarioServiceImpl implements IUsuarioServicio{
         return repo.findAll();
     }
 
-    @Override
-    public Optional<Usuario> eliminarUsuario(Integer id) {
-        return repo.findById(id).map(usuario -> {
+    @Transactional
+    public void eliminarUsuario(Integer id) {
+        try {
+            // Encontrar al usuario
+            Usuario usuario = repo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+            // Limpiar las relaciones de las tablas intermedias
+            usuario.getEntrenamiento().clear(); // Eliminar las asociaciones en 'registro_entrenamiento'
+            usuario.getRutina_Entrenamiento().clear(); // Eliminar las asociaciones en 'regsitro_rutina'
+
+            // Eliminar el usuario
             repo.delete(usuario);
-            return usuario;
-        });
+
+        } catch (DataIntegrityViolationException e) {
+            throw new RuntimeException("No se puede eliminar el usuario debido a dependencias en otras tablas.", e);
+        } catch (Exception e) {
+            throw new RuntimeException("Error al eliminar el usuario: " + e.getMessage(), e);
+        }
     }
 
     @Override
@@ -82,7 +98,7 @@ public class UsuarioServiceImpl implements IUsuarioServicio{
 
     @Override
     public void eliminarRutinaPorUsuarioId(Integer id, Integer idRutina) {
-        repo.deleteEntrenamientoByUsuarioId(id, idRutina);
+        repo.deleteRutinaByUsuarioId(id, idRutina);
     }
 
     @Override
