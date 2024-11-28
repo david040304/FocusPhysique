@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -35,7 +36,7 @@ public class Rutina_Entrenamiento {
     )
     private Set<Entrenamiento> Entrenamiento = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
     name = "registro_Rutina_sugerencia", // Nombre de la tabla de unión
     joinColumns = @JoinColumn(name = "id_Rutina"), // Columna que hace referencia a Rutina Entrenamiento

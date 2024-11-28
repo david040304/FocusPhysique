@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -39,7 +40,7 @@ public class Entrenamiento {
     @JoinColumn(name = "idTipoEntrenamiento")
     private Tipo_de_Entrenamiento tipo_de_Entrenamiento;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
     name = "registro_sugerencia", // Nombre de la tabla de unión
     joinColumns = @JoinColumn(name = "idEntrenamiento"), // Columna que hace referencia a Entrenamiento
