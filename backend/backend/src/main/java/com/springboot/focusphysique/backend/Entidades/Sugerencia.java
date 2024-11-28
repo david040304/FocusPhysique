@@ -25,7 +25,7 @@ public class Sugerencia {
     private Integer idSugerencia;
     private String descripcion;
     @Enumerated(EnumType.STRING)
-    private Tipo_Sugerencia tiposugerencia;
+    private Tipo_Sugerencia tipoSugerencia;
 
 
     @ManyToMany(mappedBy = "sugerencias") // Aquí referenciamos la propiedad 'sugerencias' de Entrenamiento

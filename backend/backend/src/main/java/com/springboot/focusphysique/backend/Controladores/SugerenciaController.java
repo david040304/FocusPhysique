@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.focusphysique.backend.Dto.SugerenciaDto;
-import com.springboot.focusphysique.backend.Entidades.Sugerencia;
 import com.springboot.focusphysique.backend.Servicio.ISugerenciaSercio;
 
+import lombok.AllArgsConstructor;
+
 @CrossOrigin("*")
+@AllArgsConstructor
 @RestController
 @RequestMapping("/api/Sugerencia")
 public class SugerenciaController {
@@ -51,25 +53,17 @@ public class SugerenciaController {
 
     // Métodos para eliminar sugerencia
     @DeleteMapping("/{id}")
-    public ResponseEntity<Sugerencia> eliminarSugerencia(@PathVariable Integer id){
-        Optional<Sugerencia> opSugerencia = Servicio.eliminarSugerencia(id);
-        if(opSugerencia.isPresent()){
-            return ResponseEntity.ok().body(opSugerencia.get());
-        }
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<String> deleteSugerencia(@PathVariable("id") Integer idSugerencia){
+        Servicio.deleteSugerencia(idSugerencia);
+        return ResponseEntity.ok("Sugerencia deleted successfully");
     }
 
     //método actualizar 
     @PutMapping("/{id}")
-    public ResponseEntity<Sugerencia> actualizarSugerencia(@PathVariable(name = "id") Integer id, 
-    @RequestBody Sugerencia sugerenciaOld ){
-        Optional<Sugerencia> Sugerencia = Servicio.obtenerSugerenciaId(id);
-        if(Sugerencia.isPresent()){
-            Sugerencia SugerenciaNew = Sugerencia.get();
-            SugerenciaNew.setDescripcion(sugerenciaOld.getDescripcion());
-            return ResponseEntity.ok(Servicio.crearSugerencia(SugerenciaNew));
-        }
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<SugerenciaDto> updateSugerencia(@PathVariable(name = "id") Integer idSugerencia, 
+    @RequestBody SugerenciaDto updatSugerencia){
+        SugerenciaDto sugerenciaDto = Servicio.updateSugerencia(idSugerencia, updatSugerencia);
+        return ResponseEntity.ok(sugerenciaDto);
     }
 
     

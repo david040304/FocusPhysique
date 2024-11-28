@@ -15,5 +15,5 @@ public class SugerenciaDto {
     private Integer idSugerencia;
     private String descripcion;
     @Enumerated(EnumType.STRING)
-    private Tipo_Sugerencia tiposugerencia;
+    private Tipo_Sugerencia tipoSugerencia;
 }

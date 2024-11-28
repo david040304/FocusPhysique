@@ -21,7 +21,7 @@ export const ListSugerencia = () => {
                     <tr>
                         <th>Sugerencia Id</th>
                         <th>Descripcion Sugerencia</th>
-                        <th>TipoDesugerencia </th>
+                        <th>TipoDesugerencia</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,8 +29,8 @@ export const ListSugerencia = () => {
                         Sugerencias.map(sugerencia =>
                             <tr key={sugerencia.idSugerencia}>
                                 <td>{sugerencia.idSugerencia}</td>
-                                <td>{sugerencia.Descripcion}</td>
-                                <td>{sugerencia.TipoDesugerencia}</td>
+                                <td>{sugerencia.descripcion}</td>
+                                <td>{sugerencia.tipoSugerencia}</td>
                             </tr>
                         )
                     }

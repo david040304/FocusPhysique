@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.springboot.focusphysique.backend.Controladores.mapper.SugerenciaMapper;
 import com.springboot.focusphysique.backend.Dto.SugerenciaDto;
 import com.springboot.focusphysique.backend.Entidades.Sugerencia;
+import com.springboot.focusphysique.backend.Entidades.Tipo_Sugerencia;
 import com.springboot.focusphysique.backend.Repositorio.RepositorySugerencia;
 import com.springboot.focusphysique.backend.Servicio.ISugerenciaSercio;
 import com.springboot.focusphysique.backend.exeption.ResourceNotFoundExceptio;
@@ -43,11 +44,22 @@ public class SugerenciaSreviceImpl implements ISugerenciaSercio {
     }
 
     @Override
-    public Optional<Sugerencia> eliminarSugerencia(Integer id) {
-        return repo.findById(id).map(sugerencia -> {
-            repo.delete(sugerencia);
-            return sugerencia;
-        });
+    public SugerenciaDto updateSugerencia(Integer idSugerencia, SugerenciaDto updateSugerencia){
+        Sugerencia sugerencia = repo.findById(idSugerencia).orElseThrow(
+            () -> new ResourceNotFoundExceptio("Sugerencia is not exists with given id:" + idSugerencia)
+        );
+        sugerencia.setDescripcion(updateSugerencia.getDescripcion());
+        sugerencia.setTipoSugerencia(updateSugerencia.getTipoSugerencia());
+        Sugerencia updatedSugerenciaObj = repo.save(sugerencia);
+        return SugerenciaMapper.mapSugerenciaDto(updatedSugerenciaObj);
+    }
+
+    @Override
+    public void deleteSugerencia(Integer idSugerencia) {
+        Sugerencia sugerencia = repo.findById(idSugerencia).orElseThrow(
+        () -> new ResourceNotFoundExceptio("Sugerencia is not exists with given id: " + idSugerencia) 
+        );
+        repo.deleteById(idSugerencia);
     }
 
 }

@@ -9,7 +9,7 @@ public class SugerenciaMapper {
         return new SugerenciaDto(
             sugerencia.getIdSugerencia(),
             sugerencia.getDescripcion(),
-            sugerencia.getTiposugerencia()
+            sugerencia.getTipoSugerencia()
         );
     }
 
@@ -17,7 +17,7 @@ public class SugerenciaMapper {
         return new Sugerencia(
             sugerenciaDto.getIdSugerencia(),
             sugerenciaDto.getDescripcion(),
-            sugerenciaDto.getTiposugerencia(), 
+            sugerenciaDto.getTipoSugerencia(),
             null, 
             null
         );
