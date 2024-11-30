@@ -11,6 +11,7 @@ import com.springboot.focusphysique.backend.Entidades.Sugerencia;
 import com.springboot.focusphysique.backend.Repositorio.RepositoryRutina_Entrenamiento;
 import com.springboot.focusphysique.backend.Repositorio.RepositorySugerencia;
 import com.springboot.focusphysique.backend.Servicio.IRutinaEntrenamientoServicio;
+import com.springboot.focusphysique.backend.exeption.ResourceNotFoundExceptio;
 
 @Service
 public class Rutina_EntrenamientoServiceImpl implements IRutinaEntrenamientoServicio{
@@ -36,11 +37,14 @@ public class Rutina_EntrenamientoServiceImpl implements IRutinaEntrenamientoServ
     }
 
     @Override
-    public Optional<Rutina_Entrenamiento> eliminarRutina(Integer id) {
-        return repo.findById(id).map(Rutina_Entrenamiento -> {
-            repo.delete(Rutina_Entrenamiento);
-            return Rutina_Entrenamiento;
-        });
+    public void eliminarRutina(Integer idRutina) {
+        Rutina_Entrenamiento rutina = repo.findById(idRutina).orElseThrow(
+        () -> new ResourceNotFoundExceptio("Rutina is not exists with given id: " + idRutina) 
+        );
+        rutina.getUsuario().clear();
+        rutina.getSugerencias();
+        rutina.getEntrenamiento();
+        repo.deleteById(idRutina);
     }
 
     @Override

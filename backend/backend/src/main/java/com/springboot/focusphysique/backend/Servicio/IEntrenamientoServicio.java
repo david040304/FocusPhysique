@@ -14,7 +14,7 @@ public interface IEntrenamientoServicio {
     Entrenamiento crearEntrenamiento(Entrenamiento datosEntrenamiento);
     Optional<Entrenamiento> obtenerEntrenPorId(Integer id);
     Iterable<Entrenamiento> obtenerEntren();
-    Optional<Entrenamiento> eliminarEntren(Integer id);
+    void eliminarEntren(Integer idEntrenamiento);
     Set<Sugerencia> getSugeSerenciasByEntrenamientoId(Integer idEntrenamiento);
     Entrenamiento agregarSugerencia(Integer idEntrenamiento, Integer idSugerencia);
     List<Entrenamiento> findByGenero(Character genero);

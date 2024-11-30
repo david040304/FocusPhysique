@@ -46,14 +46,11 @@ public class Rurina_EntrenamientoController {
         return rutinaServicio.crearRutinaEntrenamiento(entity);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Rutina_Entrenamiento> eliminarRutina(@PathVariable(name = "id") Integer id) {
-        Optional<Rutina_Entrenamiento> rutina = rutinaServicio.eliminarRutina(id);
-        if (rutina.isPresent()) {
-            return ResponseEntity.ok().body(rutina.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    //configuracion del metodo eliminarEntren
+    @DeleteMapping("/{idRutina}")
+    public ResponseEntity<String> eliminarRutina(@PathVariable("idRutina") Integer idRutina){
+        rutinaServicio.eliminarRutina(idRutina);
+        return ResponseEntity.ok("Rutina deleted successfully");
     }
 
     @PutMapping("/{id}")

@@ -1,0 +1,8 @@
+.footer {
+    margin-top: auto; /* Empuja el footer al final de la página */
+    height: 50px;
+    background-color: black;
+    text-align: center;
+    color: white;
+    padding: 10px;
+}

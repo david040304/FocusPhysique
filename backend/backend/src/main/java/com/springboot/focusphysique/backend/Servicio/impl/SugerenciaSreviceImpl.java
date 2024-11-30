@@ -1,17 +1,14 @@
 package com.springboot.focusphysique.backend.Servicio.impl;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.springboot.focusphysique.backend.Controladores.mapper.SugerenciaMapper;
 import com.springboot.focusphysique.backend.Dto.SugerenciaDto;
 import com.springboot.focusphysique.backend.Entidades.Sugerencia;
-import com.springboot.focusphysique.backend.Entidades.Tipo_Sugerencia;
 import com.springboot.focusphysique.backend.Repositorio.RepositorySugerencia;
 import com.springboot.focusphysique.backend.Servicio.ISugerenciaSercio;
 import com.springboot.focusphysique.backend.exeption.ResourceNotFoundExceptio;

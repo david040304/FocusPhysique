@@ -12,6 +12,8 @@ import com.springboot.focusphysique.backend.Entidades.Sugerencia;
 import com.springboot.focusphysique.backend.Repositorio.RepositoryEntrenamiento;
 import com.springboot.focusphysique.backend.Repositorio.RepositorySugerencia;
 import com.springboot.focusphysique.backend.Servicio.IEntrenamientoServicio;
+import com.springboot.focusphysique.backend.exeption.ResourceNotFoundExceptio;
+
 
 @Service
 public class EntrenamientoServiceImpl implements IEntrenamientoServicio {
@@ -36,11 +38,11 @@ public class EntrenamientoServiceImpl implements IEntrenamientoServicio {
     }
 
     @Override
-    public Optional<Entrenamiento> eliminarEntren(Integer id){
-        return repo.findById(id).map(entrenamiento -> {
-            repo.delete(entrenamiento);
-            return entrenamiento;
-        });
+    public void eliminarEntren(Integer idEntrenamiento) {
+        repo.findById(idEntrenamiento).orElseThrow(
+        () -> new ResourceNotFoundExceptio("Entrenamiento is not exists with given id: " + idEntrenamiento) 
+        );
+        repo.deleteById(idEntrenamiento);
     }
 
     @Override

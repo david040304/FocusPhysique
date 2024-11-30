@@ -23,7 +23,7 @@ public class Usuario extends Persona{
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Cuenta cuenta;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.MERGE})
     @JoinTable(
         name = "registro_entrenamiento", // Nombre de la tabla intermedia
         joinColumns = @JoinColumn(name = "Id"), // Columna de esta entidad
@@ -32,7 +32,7 @@ public class Usuario extends Persona{
     
     private Set<Entrenamiento> Entrenamiento = new HashSet<>();
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.MERGE})
     @JoinTable(
         name = "regsitro_rutina", // Nombre de la tabla intermedia
         joinColumns = @JoinColumn(name = "Id"), // Columna de esta entidad

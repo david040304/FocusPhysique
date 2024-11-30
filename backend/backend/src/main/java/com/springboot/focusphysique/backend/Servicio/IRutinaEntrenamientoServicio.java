@@ -10,7 +10,7 @@ public interface IRutinaEntrenamientoServicio {
     Rutina_Entrenamiento crearRutinaEntrenamiento(Rutina_Entrenamiento datosRutina);
     Optional<Rutina_Entrenamiento> obtenerRutinaPorId(Integer id);
     Iterable<Rutina_Entrenamiento> obtenerRutinas();
-    Optional<Rutina_Entrenamiento> eliminarRutina(Integer id);
+    void eliminarRutina(Integer idRutina);
     Set<Sugerencia> obtenerSugerenciasPorRutinaId(Integer idRutina);
     Rutina_Entrenamiento agregarSugerencia(Integer idRutina, Integer idSugerencia);
     void eliminarSugerenciaPorRutinaId(Integer idRutina, Integer idSugerencia);
