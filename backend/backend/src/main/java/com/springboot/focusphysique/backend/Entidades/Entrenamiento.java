@@ -40,7 +40,7 @@ public class Entrenamiento {
     @JoinColumn(name = "idTipoEntrenamiento")
     private Tipo_de_Entrenamiento tipo_de_Entrenamiento;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(
     name = "registro_sugerencia", // Nombre de la tabla de unión
     joinColumns = @JoinColumn(name = "idEntrenamiento"), // Columna que hace referencia a Entrenamiento
