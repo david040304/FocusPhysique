@@ -13,14 +13,12 @@ function App() {
       <BrowserRouter>
         <HeaderComponent />
           <Routes>
-          {/* // http://localhost:3030 */}
+            {/* // http://localhost:3030 */}
             <Route path='/' element = {<ListSugerencia/>}></Route>
             {/* // http://localhost:3030/Sugerencias */}
             <Route path='/Sugerencia' element = {<ListSugerencia/>}></Route>
             {/* // http://localhost:3030/add-sugerencia */}
             <Route path='/add-sugerencia' element = {<SugerenciaComponent/>}></Route>
-            {/* // http://localhost:3030/edit-sugerencia/1 */}
-            <Route path='/edit-sugerencia/:idSugerencia' element = {<SugerenciaComponent/>}></Route>
           </Routes>
         <FooterComponent/>
       </BrowserRouter>
