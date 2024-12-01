@@ -45,7 +45,7 @@ public class ArticuloInformativoController {
         return articulos.isEmpty() 
                 ? new ResponseEntity<>(HttpStatus.NO_CONTENT) 
                 : new ResponseEntity<>(articulos, HttpStatus.OK);
-}
+    }
 
     @PutMapping("/actualizar/{id}")
     public ResponseEntity<Articulos_Info> actualizarArticulo(
@@ -56,8 +56,8 @@ public class ArticuloInformativoController {
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<Void> eliminarArticulo(@PathVariable Integer id) {
+    public ResponseEntity<String> eliminarArticulo(@PathVariable Integer id) {
         articuloServicio.eliminarArticuloInformativo(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok("Articulo deleted successfully");
     }
 }

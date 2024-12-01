@@ -5,8 +5,8 @@ import java.sql.Time;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -30,17 +30,17 @@ public class Entrenamiento {
     private Time duracion;
     private Double met;
 
-    @ManyToMany(mappedBy = "Entrenamiento") // Relación bidireccional
+    @ManyToMany(mappedBy = "Entrenamiento", cascade = {CascadeType.MERGE}) // Relación bidireccional
     private Set<Usuario> usuario = new HashSet<>();
 
-    @ManyToMany(mappedBy = "Entrenamiento") // Relación bidireccional
+    @ManyToMany(mappedBy = "Entrenamiento", cascade = {CascadeType.MERGE}) // Relación bidireccional
     private Set<Rutina_Entrenamiento> rutina_Entrenamientos = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "idTipoEntrenamiento")
     private Tipo_de_Entrenamiento tipo_de_Entrenamiento;
 
-    @ManyToMany
+    @ManyToMany(cascade = { CascadeType.MERGE})
     @JoinTable(
     name = "registro_sugerencia", // Nombre de la tabla de unión
     joinColumns = @JoinColumn(name = "idEntrenamiento"), // Columna que hace referencia a Entrenamiento

@@ -49,12 +49,14 @@ public class AdminController {
         return ResponseEntity.notFound().build();
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<Administrador> eliminarAdmin(@PathVariable(name = "id") Integer id) {
-        Optional<Administrador> Admin = servicio.eliminarAdmin(id);
-        if (Admin.isPresent()) {
-            return ResponseEntity.ok().body(Admin.get());
-        } else {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<String> eliminarAdmin(@PathVariable(name = "id") Integer id) {
+        try {
+            servicio.eliminarAdmin(id);
+            return ResponseEntity.ok("Administrador eliminado correctamente.");
+        } catch (RuntimeException e) {
+            // Manejo de excepciones para cuando no se pueda eliminar el usuario
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("Error al eliminar el Administrador: " + e.getMessage());
         }
     }
 

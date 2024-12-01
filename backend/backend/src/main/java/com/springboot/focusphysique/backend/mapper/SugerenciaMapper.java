@@ -1,4 +1,4 @@
-package com.springboot.focusphysique.backend.Controladores.mapper;
+package com.springboot.focusphysique.backend.mapper;
 
 import com.springboot.focusphysique.backend.Dto.SugerenciaDto;
 import com.springboot.focusphysique.backend.Entidades.Sugerencia;

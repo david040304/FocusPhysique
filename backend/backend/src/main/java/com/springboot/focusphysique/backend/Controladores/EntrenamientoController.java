@@ -52,13 +52,10 @@ public class EntrenamientoController {
     }
     
     //configuracion del metodo eliminarEntren
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Entrenamiento> eliminarEntren(@PathVariable(name = "id") Integer id){
-        Optional<Entrenamiento> Entren = servicio.eliminarEntren(id);
-        if (Entren.isPresent()){
-            return ResponseEntity.ok().body(Entren.get());
-        }
-        return ResponseEntity.notFound().build();
+    @DeleteMapping("/{idEntrenamiento}")
+    public ResponseEntity<String> deleteSugerencia(@PathVariable("idEntrenamiento") Integer idEntrenamiento){
+        servicio.eliminarEntren(idEntrenamiento);
+        return ResponseEntity.ok("Entrenamiento deleted successfully");
     }
 
     //configuracion del metodo actualizarEntrenamiento

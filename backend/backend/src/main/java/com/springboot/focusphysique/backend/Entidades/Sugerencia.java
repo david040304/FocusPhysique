@@ -3,6 +3,7 @@ package com.springboot.focusphysique.backend.Entidades;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -28,10 +29,10 @@ public class Sugerencia {
     private Tipo_Sugerencia tipoSugerencia;
 
 
-    @ManyToMany(mappedBy = "sugerencias") // Aquí referenciamos la propiedad 'sugerencias' de Entrenamiento
-    private Set<Entrenamiento> entrenamientos = new HashSet<>();
+    @ManyToMany(mappedBy = "sugerencias", cascade = {CascadeType.MERGE}) // Aquí referenciamos la propiedad 'sugerencias' de Entrenamiento
+    private Set<Entrenamiento> Entrenamiento = new HashSet<>();
 
-    @ManyToMany(mappedBy = "sugerencias") // Aquí referenciamos la propiedad 'sugerencias' de Entrenamiento
+    @ManyToMany(mappedBy = "sugerencias", cascade = {CascadeType.MERGE}) // Aquí referenciamos la propiedad 'sugerencias' de Entrenamiento
     private Set<Rutina_Entrenamiento> rutina_Entrenamientos = new HashSet<>();
 
 }
