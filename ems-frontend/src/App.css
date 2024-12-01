@@ -7,3 +7,6 @@
     text-align: center;
     color: white;
 }
+.custom-margin {
+    margin-bottom: 10px;  /* Ajusta el valor según el espacio que desees */
+}
