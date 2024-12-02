@@ -1,0 +1,117 @@
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Container Styles */
+#Inicio {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Login Form Styles */
+#login-form {
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+#login-form:hover {
+    transform: scale(1.02);
+}
+
+#login-form h3 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#login-form p {
+    color: #666;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Registration Form Styles */
+#register-form {
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+#register-form:hover {
+    transform: scale(1.02);
+}
+
+#register-form h3 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#register-form p {
+    color: #666;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Form Control Styles */
+.custom-margin {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+}
+
+.custom-margin:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 5px rgba(102, 126, 234, 0.5);
+}
+
+/* Button Styles */
+#login-submit-button, 
+#register-submit-button {
+    background-color: #667eea;
+    color: white;
+    border: none;
+    padding: 12px;
+    margin-top: 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#login-submit-button:hover, 
+#register-submit-button:hover {
+    background-color: #764ba2;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    #login-form, 
+    #register-form {
+        margin-top: 20px;
+    }
+}
+
+/* Form Control Specific Styles */
+#username, 
+#password, 
+#P_Nombre, 
+#S_Nombre, 
+#P_Apellido, 
+#S_Apellido, 
+#Telefono, 
+#Genero, 
+#Altura_Inicio, 
+#Peso_Inicio {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}

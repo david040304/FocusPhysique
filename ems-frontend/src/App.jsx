@@ -22,7 +22,7 @@ function App() {
             {/* // http://localhost:3030/add-sugerencia */}
             <Route path='/add-sugerencia' element = {<SugerenciaComponent/>}></Route>
             {/* // http://localhost:3030/InicioSesion */}
-            <Route path='/InicioSesion' element = {<InicioSesionComponent/>}></Route>
+            <Route path='/usuario' element = {<InicioSesionComponent/>}></Route>
             {/* // http://localhost:3030/Home */}
             <Route path='/Home' element = {<Home/>}></Route>
           </Routes>
