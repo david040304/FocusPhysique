@@ -16,4 +16,20 @@ public class EntrenamientoMapper {
             entrenamiento.getMet()
         );
     }
+    public static Entrenamiento mapToEntrenamiento(EntrenamientoDto entrenamientoDto){
+        return new Entrenamiento(
+            entrenamientoDto.getIdEntrenamiento(),
+            entrenamientoDto.getNombreEntrenamiento(),
+            entrenamientoDto.getDescripcionEntrenamiento(),
+            entrenamientoDto.getGrupoMuscular(),
+            entrenamientoDto.getNivelDificultad(),
+            entrenamientoDto.getGenero(),
+            entrenamientoDto.getDuracion(),
+            entrenamientoDto.getMet(),
+            null,
+            null,
+            null,
+            null
+        );
+    }
 }

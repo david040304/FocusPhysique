@@ -18,8 +18,7 @@ public class SugerenciaMapper {
             sugerenciaDto.getIdSugerencia(),
             sugerenciaDto.getDescripcion(),
             sugerenciaDto.getTipoSugerencia(),
-            null, 
-            null
+            null, null
         );
     }
 }
