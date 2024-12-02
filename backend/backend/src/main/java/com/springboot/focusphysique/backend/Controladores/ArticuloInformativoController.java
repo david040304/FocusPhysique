@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.springboot.focusphysique.backend.Entidades.Articulos_Info;
+import com.springboot.focusphysique.backend.Dto.Articulo_InfoDto;
 import com.springboot.focusphysique.backend.Servicio.IArticuloServicio;
 
 @RestController
@@ -23,36 +23,36 @@ public class ArticuloInformativoController {
     @Autowired
     private IArticuloServicio articuloServicio;
 
-    @PostMapping("/{id}")
-    public ResponseEntity<Articulos_Info> crearArticulo(
-            @PathVariable Integer id,
-            @RequestBody Articulos_Info datosArticulo) {
-        Articulos_Info articulo = articuloServicio.crearArticuloInformativo(id, datosArticulo);
+    @PostMapping
+    public ResponseEntity<Articulo_InfoDto> crearArticulo(@RequestBody Articulo_InfoDto entity ) {
+        Articulo_InfoDto articulo = articuloServicio.crearArticuloInformativo(entity);
         return new ResponseEntity<>(articulo, HttpStatus.CREATED);
+  
     }
 
     @GetMapping
-    public ResponseEntity<List<Articulos_Info>> obtenerTodosArticulos() {
-        List<Articulos_Info> articulos = articuloServicio.obtenerArticulos();
+    public ResponseEntity<List<Articulo_InfoDto>> obtenerTodosArticulos() {
+        List<Articulo_InfoDto> articulos = articuloServicio.obtenerArticulos();
         return articulos.isEmpty() 
                 ? new ResponseEntity<>(HttpStatus.NO_CONTENT) 
                 : new ResponseEntity<>(articulos, HttpStatus.OK);
     }
 
     @GetMapping("/administrador/{id}")
-    public ResponseEntity<List<Articulos_Info>> obtenerArticulosPorAdministrador(@PathVariable Integer id) {
-        List<Articulos_Info> articulos = articuloServicio.obtenerArticulosPorAdministrador(id);
+    public ResponseEntity<List<Articulo_InfoDto>> obtenerArticulosPorAdministrador(@PathVariable Integer id) {
+        List<Articulo_InfoDto> articulos = articuloServicio.obtenerArticulosPorAdministrador(id);
         return articulos.isEmpty() 
                 ? new ResponseEntity<>(HttpStatus.NO_CONTENT) 
                 : new ResponseEntity<>(articulos, HttpStatus.OK);
     }
 
-    @PutMapping("/actualizar/{id}")
-    public ResponseEntity<Articulos_Info> actualizarArticulo(
-            @PathVariable Integer id,
-            @RequestBody Articulos_Info datosArticulo) {
-        Articulos_Info articuloActualizado = articuloServicio.actualizarArticuloInformativo(id, datosArticulo);
+    @PutMapping("{id}")
+    public ResponseEntity<Articulo_InfoDto> actualizarArticulo(@PathVariable (name = "id") Integer idArticulo,
+    @RequestBody Articulo_InfoDto datosArticulo) {
+        Articulo_InfoDto articuloActualizado = articuloServicio.updateArticulo(idArticulo, datosArticulo);
         return ResponseEntity.ok(articuloActualizado);
+   
+        
     }
 
     @DeleteMapping("/eliminar/{id}")

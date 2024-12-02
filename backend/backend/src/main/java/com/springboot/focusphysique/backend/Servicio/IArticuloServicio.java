@@ -3,16 +3,13 @@ package com.springboot.focusphysique.backend.Servicio;
 
 import java.util.List;
 
-import com.springboot.focusphysique.backend.Entidades.Articulos_Info;
+import com.springboot.focusphysique.backend.Dto.Articulo_InfoDto;
+
 
 public interface IArticuloServicio {
-    Articulos_Info crearArticuloInformativo(Integer id, Articulos_Info datosArticulo);
-
-    List<Articulos_Info> obtenerArticulos();
-
-    List<Articulos_Info> obtenerArticulosPorAdministrador(Integer id);
-
-    Articulos_Info actualizarArticuloInformativo(Integer id, Articulos_Info datosArticulo);
-
+    Articulo_InfoDto crearArticuloInformativo( Articulo_InfoDto datosArticulo);
+    List<Articulo_InfoDto> obtenerArticulos();
+    List<Articulo_InfoDto> obtenerArticulosPorAdministrador(Integer id);
+    Articulo_InfoDto updateArticulo(Integer id, Articulo_InfoDto datosArticulo);
     void eliminarArticuloInformativo(Integer id); 
 }
